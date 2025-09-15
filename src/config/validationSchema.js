@@ -40,10 +40,7 @@ export const checkoutSchema = Yup.object({
   zip: Yup.string()
     .min(3, "Zip Code must be at least 3 characters")
     .max(10, "Zip Code must be at most 10 characters")
-    .matches(
-      /^[a-zA-Z0-9\s-]+$/,
-      "Zip Code can only contain letters, numbers, spaces, and hyphens"
-    )
+    .matches(/^[a-zA-Z0-9\s-]+$/, "Zip Code can only contain numbers")
     .required("Zip Code is required"),
   country: Yup.string()
     .min(2, "Country must be at least 2 characters")
