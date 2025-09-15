@@ -1,0 +1,32 @@
+import React from "react";
+import { shoppingCards } from "../config/shoppingCards.config";
+
+const ShoppingCards = () => {
+  return (
+    <ul className="flex flex-col p-6 border border-[#0f0d23]/20 rounded-[15px] w-full">
+      {shoppingCards.map((item) => (
+        <li
+          key={item.id}
+          className="flex flex-row py-[16px] w-full gap-4 border-b border-[#ddd] last:border-b-0 first:pt-0 last:pb-0"
+        >
+          <div className="w-[56px] h-[56px] min-w-[56px] flex-shrink-0 bg-[#c4c4c4] rounded-[10px]"></div>
+          <div className="flex flex-row justify-between items-center w-full">
+            <div className="flex flex-col">
+              <p className="font-normal text-base leading-[1.125] text-black mb-2">
+                {item.name}
+              </p>
+              <p className="font-normal text-sm leading-[1.128] text-[#aaa]">
+                {item.description}
+              </p>
+            </div>
+            <p className="font-medium text-base leading-[1.125] text-black">
+              ${item.price}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export default ShoppingCards;
