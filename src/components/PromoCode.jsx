@@ -11,7 +11,7 @@ const PromoCode = ({ formik }) => {
   };
 
   return (
-    <div className="mt-6 mb-[40px]">
+    <div className="mt-9 mb-[40px]">
       <h3 className="mb-[24px] font-medium text-base leading-[1.125] text-black">
         Apply Promocode
       </h3>
