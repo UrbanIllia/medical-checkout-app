@@ -2,67 +2,49 @@ import * as Yup from "yup";
 
 export const checkoutSchema = Yup.object({
   name: Yup.string()
-    .min(2, "Full Name must be at least 2 characters")
-    .max(50, "Full Name must be at most 50 characters")
-    .matches(
-      /^[a-zA-Z\s'-]+$/,
-      "Full Name can only contain letters, spaces, hyphens, and apostrophes"
-    )
-    .required("Full Name is required"),
+    .min(2, "Name too short")
+    .max(50, "Name too long")
+    .matches(/^[a-zA-Z\s'-]+$/, "Invalid name format")
+    .required("Name is required"),
   email: Yup.string()
-    .email("Invalid email address")
-    .max(100, "Email Address must be at most 100 characters")
-    .required("Email Address is required"),
+    .email("Invalid email")
+    .max(100, "Email too long")
+    .required("Email is required"),
   phone: Yup.string()
-    .min(6, "Phone number must be at least 6 characters")
-    .max(20, "Phone number must be at most 20 characters")
-    .matches(
-      /^\+?[\d\s-]{6,20}$/,
-      "Phone number can only contain digits, spaces, hyphens, and an optional leading +"
-    )
-    .required("Phone number is required"),
+    .min(6, "Phone too short")
+    .max(20, "Phone too long")
+    .matches(/^\+?[\d\s-]{6,20}$/, "Invalid phone format")
+    .required("Phone is required"),
   address: Yup.string()
-    .min(5, "Street Address must be at least 5 characters")
-    .max(100, "Street Address must be at most 100 characters")
-    .matches(
-      /^[a-zA-Z0-9\s,.-]+$/,
-      "Street Address can only contain letters, numbers, spaces, commas, periods, and hyphens"
-    )
-    .required("Street Address is required"),
+    .min(5, "Address too short")
+    .max(100, "Address too long")
+    .matches(/^[a-zA-Z0-9\s,.-]+$/, "Invalid address format")
+    .required("Address is required"),
   city: Yup.string()
-    .min(2, "City must be at least 2 characters")
-    .max(50, "City must be at most 50 characters")
-    .matches(
-      /^[a-zA-Z\s-]+$/,
-      "City can only contain letters, spaces, and hyphens"
-    )
+    .min(2, "City too short")
+    .max(50, "City too long")
+    .matches(/^[a-zA-Z\s-]+$/, "Invalid city format")
     .required("City is required"),
   zip: Yup.string()
-    .min(3, "Zip Code must be at least 3 characters")
-    .max(10, "Zip Code must be at most 10 characters")
-    .matches(/^[a-zA-Z0-9\s-]+$/, "Zip Code can only contain numbers")
-    .required("Zip Code is required"),
+    .min(3, "Zip too short")
+    .max(10, "Zip too long")
+    .matches(/^[a-zA-Z0-9\s-]+$/, "Invalid zip format")
+    .required("Zip is required"),
   country: Yup.string()
-    .min(2, "Country must be at least 2 characters")
-    .max(50, "Country must be at most 50 characters")
-    .matches(
-      /^[a-zA-Z\s-]+$/,
-      "Country can only contain letters, spaces, and hyphens"
-    )
+    .min(2, "Country too short")
+    .max(50, "Country too long")
+    .matches(/^[a-zA-Z\s-]+$/, "Invalid country format")
     .required("Country is required"),
   shippingMethod: Yup.string()
     .oneOf(
       ["Odeon Express", "Cipay Jet", "Gorgom Express", "Eunioa Fast"],
-      "Please select a valid shipping method"
+      "Invalid shipping method"
     )
-    .required("Shipping method is required"),
+    .required("Shipping method required"),
   paymentMethod: Yup.string()
-    .oneOf(["Credit Card", "Paypal"], "Please select a valid payment method")
-    .required("Payment method is required"),
+    .oneOf(["Credit Card", "Paypal"], "Invalid payment method")
+    .required("Payment method required"),
   promocode: Yup.string()
-    .matches(
-      /^[A-Z0-9]{3,10}$/,
-      "Promo code must be 3-10 alphanumeric characters"
-    )
+    .matches(/^[A-Z0-9]{3,10}$/, "Invalid promo code")
     .optional(),
 });
