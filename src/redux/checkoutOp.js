@@ -1,6 +1,5 @@
-// frontend/src/redux/checkoutOp.js
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios"; // Добавляем axios
+import axios from "axios";
 import { t } from "../helpers/helpers";
 
 export const checkoutOrder = createAsyncThunk(
@@ -13,11 +12,6 @@ export const checkoutOrder = createAsyncThunk(
         orders: cart.cartItems,
         totalPrice: total.total,
       };
-      console.log(
-        "🟢 FRONTEND - FINAL DATA TO SEND:",
-        JSON.stringify(dataToSend, null, 2)
-      );
-      // console.log("Data to send:", JSON.stringify(dataToSend, null, 2));
 
       const response = await axios.post(
         "https://checkout-back-f0mz.onrender.com/order",
