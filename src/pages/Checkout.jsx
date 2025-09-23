@@ -7,13 +7,20 @@ import PaymentMethod from "../components/PaymentMethod";
 import PromoCode from "../components/PromoCode";
 import CardList from "../components/CardList";
 import { checkoutSchema } from "../config/validationSchema";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import ShoppingCards from "../components/ShoppingCards";
 import Total from "../components/Total";
+import { t } from "../helpers/helpers";
+import { useDispatch, useSelector } from "react-redux";
+import { checkoutOrder } from "../redux/checkoutOp";
+import { clearCart } from "../redux/cartSlice";
+import { persistor } from "../redux/store";
 
 const styleh3 = "font-medium text-black text-[24px]";
 
 const Checkout = () => {
+  const dispatch = useDispatch();
+  const { status } = useSelector((state) => state.checkout);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -28,8 +35,13 @@ const Checkout = () => {
       promocode: "",
     },
     validationSchema: checkoutSchema,
-    onSubmit: (values) => {
-      toast.success("Checkout successful!");
+    onSubmit: (values, { resetForm }) => {
+      dispatch(checkoutOrder(values));
+      resetForm();
+      dispatch(clearCart());
+      // localStorage.removeItem("cartItems");
+      persistor.purge();
+      // toast.success("Checkout successful!");
       console.log(values);
     },
   });
@@ -44,7 +56,7 @@ const Checkout = () => {
           "xl:pt-[88px] xl:pb-[94px]"
         )}
       >
-        Checkout
+        {t("Checkout")}
       </h2>
       <form onSubmit={formik.handleSubmit}>
         <div
@@ -59,7 +71,7 @@ const Checkout = () => {
             <ShippingDetails formik={formik} />
             <div className="mb-8 relative">
               <h4 className="font-medium font-dm-sans text-base leading-[1.125] text-black mb-[34px]">
-                Shipping Method
+                {t("Shipping Method")}
               </h4>
               <ShippingMethod
                 onChange={formik.handleChange}
@@ -70,7 +82,7 @@ const Checkout = () => {
               />
             </div>
             <div className="mb-8 relative">
-              <h3 className={clsx(styleh3, "mb-6")}>Payment Method</h3>
+              <h3 className={clsx(styleh3, "mb-6")}>{t("Payment Method")}</h3>
               <PaymentMethod
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -81,7 +93,7 @@ const Checkout = () => {
             </div>
           </div>
           <div className="w-full">
-            <h3 className={clsx(styleh3, "mb-[23px]")}>Order Summary</h3>
+            <h3 className={clsx(styleh3, "mb-[23px]")}>{t("Order Summary")}</h3>
             <ShoppingCards
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -90,9 +102,13 @@ const Checkout = () => {
             <Total />
             <button
               type="submit"
-              className="font-medium text-xl leading-[0.9] text-white rounded-2xl w-full py-[31px] bg-[#5a9bfe] hover:bg-[#2056a7] transition"
+              disabled={status === "succeeded"}
+              className={clsx(
+                "font-medium text-xl leading-[0.9] text-white rounded-2xl w-full py-[31px] bg-[#5a9bfe] hover:bg-[#2056a7] transition disabled:bg-gray-600",
+                status === "loading" && "bg-green-300"
+              )}
             >
-              Checkout
+              {status === "loading" ? t("Submitting") : t("Checkout")}
             </button>
           </div>
         </div>

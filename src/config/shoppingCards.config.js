@@ -1,4 +1,4 @@
-export const shoppingCards = [
+export const shoppingCart = [
   {
     id: 1,
     name: "Capsul White",

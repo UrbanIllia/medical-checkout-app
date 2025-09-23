@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { PAGES } from "../config/pages.config";
+import { t } from "../helpers/helpers";
 
 const HeaderNav = () => {
   return (
@@ -11,7 +12,7 @@ const HeaderNav = () => {
               to={path}
               className="font-normal text-sm text-white hover:text-blue-600 transition"
             >
-              {key.charAt(0).toUpperCase() + key.slice(1).toLowerCase()}
+              {t(key).charAt(0).toUpperCase() + t(key).slice(1).toLowerCase()}
             </Link>
           </li>
         ))}

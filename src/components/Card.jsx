@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { t } from "../helpers/helpers";
 
 const Card = ({ svg, title, description, width }) => {
   return (
@@ -8,10 +9,12 @@ const Card = ({ svg, title, description, width }) => {
         dangerouslySetInnerHTML={{ __html: svg }}
       />
 
-      <h3 className="text-xl font-bold text-black mb-2 text-center">{title}</h3>
+      <h3 className="text-xl font-bold text-black mb-2 text-center">
+        {t(title)}
+      </h3>
 
       <p className=" font-normal text-base leading-[1.56] text-center text-[#aaa]">
-        {description}
+        {t(description)}
       </p>
     </div>
   );

@@ -12,8 +12,16 @@ import Checkout from "./pages/Checkout";
 import Search from "./pages/Search";
 import Logout from "./pages/Logout";
 import { ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { initializeCart } from "./redux/cartSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initializeCart());
+  }, [dispatch]);
   return (
     <div>
       <Routes>

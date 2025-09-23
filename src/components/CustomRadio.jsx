@@ -11,7 +11,7 @@ const CustomRadio = forwardRef(
           className
         )}
       >
-        <style jsx>{`
+        <style jsx="true">{`
           .peer:checked ~ .radio-container .radio-inner {
             background-color: #5a9bfe;
           }
