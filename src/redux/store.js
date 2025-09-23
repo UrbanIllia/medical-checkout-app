@@ -12,6 +12,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { totalReducer } from "./totalSlice";
 
 const persistConfig = {
   key: "root",
@@ -25,6 +26,7 @@ const store = configureStore({
   reducer: {
     checkout: checkoutReducer,
     cart: persistedReducer,
+    total: totalReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

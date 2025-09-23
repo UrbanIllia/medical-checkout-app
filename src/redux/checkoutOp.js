@@ -7,13 +7,17 @@ export const checkoutOrder = createAsyncThunk(
   "checkout/checkoutOrder",
   async (formData, { rejectWithValue, getState }) => {
     try {
-      const { cart } = getState();
+      const { cart, total } = getState();
       const dataToSend = {
         ...formData,
         orders: cart.cartItems,
+        totalPrice: total.total,
       };
-
-      console.log("Data to send:", JSON.stringify(dataToSend, null, 2));
+      console.log(
+        "🟢 FRONTEND - FINAL DATA TO SEND:",
+        JSON.stringify(dataToSend, null, 2)
+      );
+      // console.log("Data to send:", JSON.stringify(dataToSend, null, 2));
 
       const response = await axios.post(
         "https://checkout-back-f0mz.onrender.com/order",
