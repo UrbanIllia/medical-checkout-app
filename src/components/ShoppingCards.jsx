@@ -7,6 +7,9 @@ const ShoppingCards = () => {
   const dispatch = useDispatch();
   return (
     <ul className="flex flex-col p-6 border border-[#0f0d23]/20 rounded-[15px] w-full">
+      {cartItems.length === 0 && (
+        <p className="text-center font-bold text-xl">The cart is empty</p>
+      )}
       {cartItems.map((item) => (
         <li
           key={item.id}

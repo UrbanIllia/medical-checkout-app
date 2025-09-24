@@ -39,9 +39,9 @@ const Checkout = () => {
       dispatch(checkoutOrder(values));
       resetForm();
       dispatch(clearCart());
-      // localStorage.removeItem("cartItems");
+
       persistor.purge();
-      // toast.success("Checkout successful!");
+
       console.log(values);
     },
   });
